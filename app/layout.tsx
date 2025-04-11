@@ -48,7 +48,10 @@ const theme = createTheme({
     ],
   },
 });
-
+export const metadata = {
+  title: 'Raj Mahadik',
+  description: 'Fullstack Developer',
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -56,6 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <ColorSchemeScript defaultColorScheme="dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/png" href="/logo.png" />
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="dark">
