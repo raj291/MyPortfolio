@@ -59,3 +59,42 @@ a {
 .nav-item-dark:hover {
   background-color: #2c2e33;
 }
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 16px rgba(255, 0, 81, 0.2) !important;
+}
+
+.project-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(255, 0, 81, 0.18) !important;
+}
+
+@media (max-width: 48em) {
+  .mantine-Container-root {
+    --container-size: 100%;
+  }
+
+  .mantine-Tabs-list {
+    max-width: 100%;
+    overflow-x: auto !important;
+    scrollbar-width: none;
+  }
+
+  .mantine-Tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

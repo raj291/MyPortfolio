@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { Container, Text } from '@mantine/core';
 export default function FooterPage() {
 
@@ -14,7 +11,7 @@ export default function FooterPage() {
     }}>
       <Container>
         <Text ta="center" size="sm">
-          {`© 2025 Raj Mahadik. All rights reserved.`}
+          {`© 2026 Raj Mahadik. Built with Next.js.`}
         </Text>
       </Container>
     </div>

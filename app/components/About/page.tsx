@@ -1,91 +1,123 @@
 'use client';
-import { Container, Text, Title, Space, Timeline,Group } from "@mantine/core";
-import { useMantineTheme, useMantineColorScheme } from '@mantine/core';
+
+import {
+  Container,
+  Group,
+  List,
+  Space,
+  Text,
+  Timeline,
+  Title,
+  useMantineColorScheme,
+  useMantineTheme,
+} from '@mantine/core';
 
 const experiences = [
   {
+    company: 'Contriva, Inc.',
+    title: 'Software Engineer - AI',
+    time: 'Aug 2025 - Apr 2026',
+    location: 'Richmond, US',
+    points: [
+      'Designed FastAPI and Django REST APIs that surfaced member risk, claims utilization, and care-gap insights.',
+      'Integrated Kafka and RabbitMQ for real-time healthcare data updates and reliable event processing.',
+      'Built a RAG pipeline with LLM embeddings and Pinecone for semantic, context-aware document retrieval.',
+      'Integrated ML inference services for risk prediction and anomaly detection, supported by containerized CI/CD deployments.',
+    ],
+  },
+  {
+    company: 'Rocket Mortgage',
+    title: 'Software Engineer',
+    time: 'May 2025 - Aug 2025',
+    location: 'Detroit, US',
+    points: [
+      'Developed and optimized mortgage pricing and fee-calculation APIs for faster, accurate Rocket Pro quotations.',
+      'Migrated pricing logic into scalable event-driven microservices and integrated Sierra AI workflow automation.',
+      'Improved real-time diagnostics with structured Serilog logging and supported automated API delivery with QA and DevOps.',
+    ],
+  },
+  {
     company: 'Antra, Inc.',
     title: 'Full-Stack Developer',
-    time: 'Jan 2024 – Current',
-    location: 'Remote, USA',
-    isPresent: true,
+    time: 'Jan 2024 - May 2025',
+    location: 'Remote, US',
     points: [
-      'Developed a comprehensive HR Management System as a SPA using Angular and Bootstrap, increasing user engagement by 20%.',
-      'Built front-end components with TypeScript for efficient data binding and lazy loading, integrated with ASP.NET Web API microservices.',
-      'Designed modular microservices for Employee Management and Payroll, tested and containerized with Docker.',
-      'Used Microsoft SQL Server on Azure and wrote optimized stored procedures and views that reduced query time by 15%.',
-      'Implemented CI/CD via Azure DevOps and Agile development with JIRA, reducing deployment downtime by 30%.',
+      'Built an Angular and ASP.NET HR platform with modular services for employee records, benefits, payroll, and attendance.',
+      'Optimized SQL Server access with stored procedures and Redis caching, and secured APIs with JWT role-based access control.',
+      'Maintained more than 90% test coverage with MSTest and Moq and automated build, test, and deployment in Azure DevOps.',
     ],
   },
   {
     company: 'JP Morgan (Forage)',
-    title: 'Software Engineer (Internship)',
-    time: 'May 2023 – July 2023',
-    location: 'Remote, USA',
-    isPresent: true,
+    title: 'Software Engineer',
+    time: 'May 2023 - Jul 2023',
+    location: 'Remote, US',
     points: [
-      'Created React web application using TypeScript for stock option data visualization with modular components and routing.',
-      'Developed a Python-based multithreaded HTTP server for CRUD operations on stock trading data.',
-      'Optimized latency by 30% and implemented observables and React Hooks for efficient state and event management.',
+      'Built a React application for real-time stock-option analysis, trade simulation, and WebSocket-driven charts.',
+      'Implemented REST data services and stress-tested concurrent trade workloads for stability.',
     ],
   },
   {
     company: 'Azinova Technologies',
     title: 'Full-Stack Developer',
-    time: 'Apr 2021 – Aug 2022',
+    time: 'Apr 2021 - Aug 2022',
     location: 'Dubai, UAE',
-    isPresent: true,
     points: [
-      'Built a Cleaning Service Appointment System using ASP.NET Web API and Angular.',
-      'Optimized MSSQL performance via EF Core, raw SQL, migrations, and indexing.',
-      'Dockerized components and implemented CI/CD pipelines for scalable deployment.',
+      'Engineered a cleaning-service appointment platform with live tracking, automated scheduling, bookings, and payments.',
+      'Added caching, lazy loading, SMS/email notifications, and Dockerized Azure App Service deployments.',
     ],
   },
   {
     company: 'Katalyst Incorporation, LLC',
     title: 'Web Developer',
-    time: 'Feb 2020 – Feb 2021',
+    time: 'Feb 2020 - Feb 2021',
     location: 'Dubai, UAE',
-    isPresent: false,
     points: [
-      'Maintained Wholesale Food and Retail Distributor website using ASP.NET MVC and CSS.',
-      'Implemented SEO techniques, leading to a 20% increase in website traffic.',
-      'Collaborated across teams to integrate UI and backend logic, improving UX and boosting sales by 10%.',
+      'Developed a responsive wholesale and retail commerce platform with payments, tax-aware invoicing, and SQL reporting.',
+      'Improved discoverability through schema, metadata, and structured-data SEO work.',
     ],
   },
 ];
-export default function AboutPage(){
+
+export default function AboutPage() {
   const theme = useMantineTheme();
-const { colorScheme } = useMantineColorScheme();
+  const { colorScheme } = useMantineColorScheme();
+  const textColor = colorScheme === 'dark' ? theme.white : theme.black;
 
-const isDark = colorScheme === 'dark';
-const textColor = isDark ? theme.white : theme.black;
-
-  const summary = "Hello!, I'am Raj and i am a Full-stack developer with years of experience building dynamic SPAs and scalable microservices Application using Angular, React, and ASP.NET Web API. Holds both a Master's and Bachelor's degree in Computer Science, with a proven track record in optimizing databases, automating CI/CD pipelines, and deploying high-performance solutions that drive business growth.";
-  return(
-   <Container fluid>
-    <Title order={2} mb="md">About Me</Title>
-      <Text>
-      {summary}
+  return (
+    <Container fluid px={0}>
+      <Title order={2} mb="md">About Me</Title>
+      <Text lh={1.75}>
+        I&apos;m a full-stack and AI software engineer with 3+ years of experience building scalable web
+        platforms, modular backend systems, and cloud-ready services across healthcare, financial,
+        enterprise, and operations domains. I work across Python, .NET, Angular, and React, with a focus on
+        reliable APIs, event-driven systems, AI retrieval workflows, and thoughtful user experiences.
       </Text>
-      <Space h="md"/> 
+      <Space h="xl" />
       <Title order={2}>Experience</Title>
-      <Space h="md"/>
-      <Timeline color= "red" active={experiences.length} lineWidth={3} bulletSize={18}>
-        {experiences.map((exp,i) => (
-          <Timeline.Item style={{
-            fontSize: '1rem',
-            color: textColor,
-          }} title = {<Group justify="space-between">{exp.title} <Text size="sm">{exp.time}</Text></Group>}>
-          <Group justify="space-between">
-            <Text c="dimmed" size="sm">{exp.company}</Text>
-            <Text c="dimmed" size="sm">{exp.location}</Text>
-          </Group>
-            <Space h="xs"/>
+      <Space h="md" />
+      <Timeline color="red" active={experiences.length} lineWidth={3} bulletSize={18}>
+        {experiences.map((exp) => (
+          <Timeline.Item
+            key={`${exp.company}-${exp.time}`}
+            style={{ fontSize: '1rem', color: textColor }}
+            title={
+              <Group justify="space-between" align="flex-start" wrap="wrap" gap="xs">
+                <Text fw={600}>{exp.title}</Text>
+                <Text size="sm">{exp.time}</Text>
+              </Group>
+            }
+          >
+            <Group justify="space-between" align="flex-start" wrap="wrap" gap={4}>
+              <Text c="dimmed" size="sm">{exp.company}</Text>
+              <Text c="dimmed" size="sm">{exp.location}</Text>
+            </Group>
+            <List size="sm" mt="sm" spacing={5} pr={{ base: 0, sm: 'md' }}>
+              {exp.points.map((point) => <List.Item key={point}>{point}</List.Item>)}
+            </List>
           </Timeline.Item>
-        
         ))}
-        </Timeline>
+      </Timeline>
     </Container>
   );
 }

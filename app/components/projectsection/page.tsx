@@ -1,135 +1,131 @@
 'use client';
+
 import {
+  Anchor,
+  Badge,
+  Card,
   Container,
+  Group,
+  SimpleGrid,
+  Stack,
   Text,
   Title,
-  Space,
-  Group,
-  Card,
-  Badge,
-  Anchor,
-  Loader,
-  Stack,
-  useMantineTheme, useMantineColorScheme
+  useMantineColorScheme,
+  useMantineTheme,
 } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { IconArrowUpRight } from '@tabler/icons-react';
 
-const featuredrepos = [
+const featuredRepos = [
   {
-    name: 'raj291/JobProfileMaker',
-    tech: ['.NET', 'C#', 'MSSQL', 'Angular', 'Microservice', 'Docker', 'Tika.NET'],
+    name: 'Online Mini Wallet',
+    repo: 'OnlineMiniWalletDemo',
+    description: 'A concurrency-safe wallet API with credit, debit, transfers, idempotent operations, filtered history, and layered negative-balance protection.',
+    tech: ['.NET 8', 'ASP.NET Core', 'EF Core', 'SQLite', 'REST API'],
+    new: true,
   },
   {
-    name: 'raj291/MovieShop',
-    tech: ['ASP.NET Core', 'EF Core', 'SQL Server', 'WebAPI', 'Azure', 'Tailwind'],
+    name: 'AI Agent Security Shield',
+    repo: 'ai-agent-security-shield',
+    description: 'A multi-agent security layer for prompt injection, jailbreak, data-exfiltration, PII leakage, RAG poisoning, and behavioral anomaly detection.',
+    tech: ['Python', 'LangGraph', 'FastAPI', 'ChromaDB', 'Pytest'],
+    new: true,
   },
   {
-    name: 'raj291/EShop-Microservices',
-    tech: ['.NET', 'Microservices', 'RabbitMQ', 'Docker'],
+    name: 'Neural Network from Scratch',
+    repo: 'Neural-Network',
+    description: 'An MNIST handwritten-digit classifier built from first principles with NumPy, including forward propagation, backpropagation, and gradient descent.',
+    tech: ['Python', 'NumPy', 'MNIST', 'Machine Learning'],
+    new: true,
   },
   {
-    name: 'raj291/weatherio',
-    tech: ['React', 'REST API', 'Tailwind', 'Express'],
+    name: 'Financial Risk Analyzer',
+    repo: 'Finacial_Risk_Analyzer',
+    description: 'An AI-powered service that analyzes transaction patterns to surface fraud, suspicious activity, and high-risk behavior.',
+    tech: ['Python', 'FastAPI', 'Pydantic', 'Hugging Face', 'RAG'],
+    new: true,
   },
   {
-    name: 'raj291/facial-dection-haar',
-    tech: ['Python', 'OpenCV', 'CCNA', 'IoT', 'YOLO'],
+    name: 'Requirements Clarifier AI',
+    repo: 'Requirement-Clarifier',
+    description: 'Turns vague Jira tickets into structured engineering specs with acceptance criteria, edge cases, test ideas, risks, and confidence scoring.',
+    tech: ['Next.js', 'TypeScript', 'OpenAI', 'Zod', 'Mantine'],
+    new: true,
   },
   {
-    name: 'raj291/Kanban-board',
-    tech: ['React', 'Redux', 'Agile', 'Jira', 'Tailwind'],
+    name: 'Job Profile Maker',
+    repo: 'JobProfileMaker',
+    description: 'An Angular SPA and ASP.NET Web API that parses resumes with Tika.NET and applies NLP techniques to help build job profiles.',
+    tech: ['.NET', 'C#', 'Angular', 'Microservices', 'Docker'],
+  },
+  {
+    name: 'eShop Microservices',
+    repo: 'EShop-Microservices',
+    description: 'An e-commerce system built as ASP.NET Web API microservices with React and cloud delivery workflows.',
+    tech: ['.NET', 'Microservices', 'RabbitMQ', 'Docker', 'React'],
+  },
+  {
+    name: 'Facial Detection - Haar',
+    repo: 'facial-dection-haar',
+    description: 'A facial-recognition model using Haar cascades, grayscale processing, Python, and OpenCV.',
+    tech: ['Python', 'OpenCV', 'Haar Cascade', 'CNN'],
   },
 ];
 
 export default function ProjectPage() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const theme = useMantineTheme();
-const { colorScheme } = useMantineColorScheme();
-
-const isDark = colorScheme === 'dark';
-
-const cardStyles = {
-  backgroundColor: isDark ? theme.colors.dark[7] : theme.white,
-  boxShadow: isDark
-    ? '0 0 12px rgba(255, 0, 80, 0.08)'
-    : '0 0 12px rgba(0, 0, 0, 0.04)',
-  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-};
-
-  useEffect(() => {
-    Promise.all(
-      featuredrepos.map(async (repo) => {
-        const res = await fetch(`https://api.github.com/repos/${repo.name}`);
-        const repoData = await res.json();
-
-        const langRes = await fetch(`https://api.github.com/repos/${repo.name}/languages`);
-        const languages = await langRes.json();
-
-        return {
-          ...repoData,
-          tech: repo.tech,
-          full_name: repo.name,
-        };
-      })
-    ).then((data) => {
-      setProjects(data);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) return <Loader />;
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === 'dark';
 
   return (
-    <Container size="md" py="xl">
-      <Stack gap="md">
-        {projects.map((repo) => (
+    <Container fluid px={0}>
+      <Stack gap="xs" mb="lg">
+        <Title order={2}>Featured Projects</Title>
+        <Text c="dimmed" size="sm">
+          Selected product, AI, and distributed-systems work. Practice-only daily commit repositories are intentionally excluded.
+        </Text>
+      </Stack>
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+        {featuredRepos.map((project) => (
           <Card
-          key={repo.id || repo.full_name}
-          radius="md"
-          withBorder
-          padding="md"
-          style={cardStyles}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = isDark
-              ? '0 0 18px rgba(255, 0, 81, 0.21)'
-              : '0 0 12px rgba(254, 1, 128, 0.27)';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = cardStyles.boxShadow;
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}
-        >
-            <Group justify='space-between' mb="xs">
-              <Title order={4} style={{ fontSize: '1.1rem' }}>
-                {repo.name}
-              </Title>
-              <Anchor href={repo.html_url} target="_blank" size="xs">
-                GitHub →
-              </Anchor>
-            </Group>
-
-            <Text size="sm" c="dimmed" lineClamp={2}>
-              {repo.description || 'No description available.'}
-            </Text>
-
-            <Group gap="xs" mt="sm" wrap="wrap">
-              {repo.tech?.map((tech: string) => (
-                <Badge
-                  key={`${repo.full_name}-${tech}`}
-                  variant="light"
-                  radius="xl"
-                  size="xs"
-                  color="gray"
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </Group>
+            key={project.repo}
+            component="article"
+            radius="md"
+            withBorder
+            padding="lg"
+            className="project-card"
+            style={{
+              backgroundColor: isDark ? theme.colors.dark[7] : theme.white,
+              boxShadow: isDark ? '0 0 12px rgba(255, 0, 80, 0.08)' : '0 0 12px rgba(0, 0, 0, 0.04)',
+            }}
+          >
+            <Stack justify="space-between" h="100%" gap="md">
+              <div>
+                <Group justify="space-between" align="flex-start" wrap="nowrap" mb="xs">
+                  <Group gap="xs" align="center">
+                    <Title order={3} fz="md">{project.name}</Title>
+                    {project.new && <Badge size="xs" color="red" variant="filled">New</Badge>}
+                  </Group>
+                  <Anchor
+                    href={`https://github.com/raj291/${project.repo}`}
+                    target="_blank"
+                    aria-label={`View ${project.name} on GitHub`}
+                  >
+                    <IconArrowUpRight size={18} />
+                  </Anchor>
+                </Group>
+                <Text size="sm" c="dimmed" lh={1.6}>{project.description}</Text>
+              </div>
+              <Group gap={6} wrap="wrap">
+                {project.tech.map((tech) => (
+                  <Badge key={`${project.repo}-${tech}`} variant="light" radius="xl" size="xs" color="gray">
+                    {tech}
+                  </Badge>
+                ))}
+              </Group>
+            </Stack>
           </Card>
         ))}
-      </Stack>
+      </SimpleGrid>
     </Container>
   );
 }

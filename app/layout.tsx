@@ -49,8 +49,8 @@ const theme = createTheme({
   },
 });
 export const metadata = {
-  title: 'Raj Mahadik',
-  description: 'Fullstack Developer',
+  title: 'Raj Mahadik | Full-Stack & AI Software Engineer',
+  description: 'Portfolio of Raj Mahadik, a Dubai-based full-stack and AI software engineer building scalable APIs, cloud platforms, and intelligent applications.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -14,7 +14,7 @@ import {
   FloatingIndicator,
   rem
 } from '@mantine/core';
-import { IconBrandGithub, IconBrandLinkedin, IconMail, IconCheck } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandLinkedin, IconMail, IconCheck, IconMapPin } from '@tabler/icons-react';
 import { Tooltip, CopyButton } from '@mantine/core';
 
 import { IconSun, IconMoon } from '@tabler/icons-react';
@@ -65,12 +65,16 @@ export default function Portfolio() {
   return (
     <Container size="lg" py="xl">
       {/* Header */}
-      <Group justify="space-between" mb="lg">
-        <Group>
+      <Group justify="space-between" align="flex-start" mb="lg" style={{ position: 'relative' }}>
+        <Group align="flex-start" wrap="nowrap" pr={50}>
           <Avatar src={logo.src} alt="logo" size="md" radius="md" />
           <div>
             <Title order={2} style={{ fontFamily: 'var(--font-pixel)' }}>Raj Mahadik</Title>
-            <Text size="sm" c="dimmed">Fullstack Developer</Text>
+            <Text size="sm" c="dimmed">Full-Stack & AI Software Engineer</Text>
+            <Group gap={4} mt={3}>
+              <IconMapPin size={14} aria-hidden="true" />
+              <Text size="xs" c="dimmed">Dubai, UAE</Text>
+            </Group>
             <Group gap="xs" mt={4}>
     <Tooltip label="LinkedIn" withArrow>
       <ActionIcon
@@ -79,6 +83,7 @@ export default function Portfolio() {
         target="_blank"
         variant="subtle"
         size="lg"
+        aria-label="Open Raj Mahadik's LinkedIn profile"
       >
         <IconBrandLinkedin size={18} />
       </ActionIcon>
@@ -91,6 +96,7 @@ export default function Portfolio() {
         target="_blank"
         variant="subtle"
         size="lg"
+        aria-label="Open Raj Mahadik's GitHub profile"
       >
         <IconBrandGithub size={18} />
       </ActionIcon>
@@ -99,7 +105,7 @@ export default function Portfolio() {
     <CopyButton value={email} timeout={2000}>
       {({ copied, copy }) => (
         <Tooltip label={copied ? "Copied!" : "Email"} withArrow>
-          <ActionIcon onClick={copy} variant="subtle" size="lg">
+          <ActionIcon onClick={copy} variant="subtle" size="lg" aria-label="Copy email address">
             {copied ? <IconCheck size={18} /> : <IconMail size={18} />}
           </ActionIcon>
         </Tooltip>
@@ -116,6 +122,7 @@ export default function Portfolio() {
           size="lg"
           radius="md"
           aria-label="Toggle color scheme"
+          style={{ position: 'absolute', top: 0, right: 0 }}
         >
           {dark ? <IconSun size={18} /> : <IconMoon size={18} />}
         </ActionIcon>
@@ -167,6 +174,8 @@ export default function Portfolio() {
             justifyContent: 'center',
             gap: rem(5),
             padding: rem(4),
+            flexWrap: 'nowrap',
+            width: 'max-content',
           }}
         >
           {sections.map((section) => (
@@ -199,7 +208,7 @@ export default function Portfolio() {
         </Tabs.List>
 
         {/* Tab Panels */}
-        <Container py="md" style={{ minHeight: 300 }}>
+        <Container py="md" px={0} style={{ minHeight: 300 }}>
           <Tabs.Panel value="About">
             <AboutPage/>
           </Tabs.Panel>
