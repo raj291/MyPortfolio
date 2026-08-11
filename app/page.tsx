@@ -2,10 +2,14 @@
 
 import { useEffect, useState, useRef } from 'react';
 import {
+  Badge,
+  Button,
   Group,
   Text,
   Container,
   ActionIcon,
+  Paper,
+  Stack,
   Title,
   useMantineColorScheme,
   useMantineTheme,
@@ -14,20 +18,25 @@ import {
   FloatingIndicator,
   rem
 } from '@mantine/core';
-import { IconBrandGithub, IconBrandLinkedin, IconMail, IconCheck, IconMapPin } from '@tabler/icons-react';
+import {
+  IconArrowRight,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconCheck,
+  IconCopy,
+  IconMapPin,
+  IconMoon,
+  IconSparkles,
+  IconSun,
+} from '@tabler/icons-react';
 import { Tooltip, CopyButton } from '@mantine/core';
 
-import { IconSun, IconMoon } from '@tabler/icons-react';
 import logo from '../public/logo.png';
 import AboutPage from './components/About/page';
 import './globals.css';
 import EducationPage from './components/Education/page';
 import ProjectPage from './components/projectsection/page';
 import SkillsSection from './components/Skills/page';
-// Placeholder sections
-//const AboutSection = () => (<><AboutPage/></>);
-//const EducationSection = () => <Text>Education content goes here...</Text>;
-//const SkillsSection = () => <Text>Skills content goes here...</Text>;
 const email = 'rajmahdik29@gmail.com';
 const linkedin = 'https://www.linkedin.com/in/raj-4221111s/';
 const github = 'https://github.com/raj291';
@@ -45,9 +54,7 @@ export default function Portfolio() {
   const tabRefsMap = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const setTabRef = (val: string) => (node: HTMLButtonElement | null) => {
-    if (node) {
-      tabRefsMap.current[val] = node;
-    }
+    tabRefsMap.current[val] = node;
   };
 
   useEffect(() => {
@@ -58,75 +65,92 @@ export default function Portfolio() {
     setColorScheme(dark ? 'light' : 'dark');
   };
 
-  if (!mounted) {
-    return <div>Loading...</div>;
-  }
+  const showProjects = () => {
+    setActiveTab('Projects');
+  };
 
   return (
     <Container size="lg" py="xl">
-      {/* Header */}
-      <Group justify="space-between" align="flex-start" mb="lg" style={{ position: 'relative' }}>
-        <Group align="flex-start" wrap="nowrap" pr={50}>
-          <Avatar src={logo.src} alt="logo" size="md" radius="md" />
-          <div>
-            <Title order={2} style={{ fontFamily: 'var(--font-pixel)' }}>Raj Mahadik</Title>
-            <Text size="sm" c="dimmed">Full-Stack & AI Software Engineer</Text>
-            <Group gap={4} mt={3}>
-              <IconMapPin size={14} aria-hidden="true" />
-              <Text size="xs" c="dimmed">Dubai, UAE</Text>
-            </Group>
-            <Group gap="xs" mt={4}>
-    <Tooltip label="LinkedIn" withArrow>
-      <ActionIcon
-        component="a"
-        href={linkedin}
-        target="_blank"
-        variant="subtle"
-        size="lg"
-        aria-label="Open Raj Mahadik's LinkedIn profile"
-      >
-        <IconBrandLinkedin size={18} />
-      </ActionIcon>
-    </Tooltip>
-
-    <Tooltip label="GitHub" withArrow>
-      <ActionIcon
-        component="a"
-        href={github}
-        target="_blank"
-        variant="subtle"
-        size="lg"
-        aria-label="Open Raj Mahadik's GitHub profile"
-      >
-        <IconBrandGithub size={18} />
-      </ActionIcon>
-    </Tooltip>
-
-    <CopyButton value={email} timeout={2000}>
-      {({ copied, copy }) => (
-        <Tooltip label={copied ? "Copied!" : "Email"} withArrow>
-          <ActionIcon onClick={copy} variant="subtle" size="lg" aria-label="Copy email address">
-            {copied ? <IconCheck size={18} /> : <IconMail size={18} />}
-          </ActionIcon>
-        </Tooltip>
-      )}
-    </CopyButton>
-  </Group>
-          </div>
-
-        </Group>
-
+      <Paper component="header" className="portfolio-hero" radius="xl" p={{ base: 'lg', sm: 'xl' }} mb="xl">
+        <div className="hero-glow hero-glow-one" aria-hidden="true" />
+        <div className="hero-glow hero-glow-two" aria-hidden="true" />
         <ActionIcon
           onClick={toggleColorScheme}
-          variant="outline"
+          variant="subtle"
           size="lg"
           radius="md"
           aria-label="Toggle color scheme"
-          style={{ position: 'absolute', top: 0, right: 0 }}
+          className="theme-toggle"
         >
           {dark ? <IconSun size={18} /> : <IconMoon size={18} />}
         </ActionIcon>
-      </Group>
+
+        <Stack gap="lg" className="hero-content">
+          <Group align="center" wrap="nowrap" pr={42}>
+            <Avatar src={logo.src} alt="Raj Mahadik" size={64} radius="lg" className="hero-avatar" />
+            <div>
+              <Badge color="red" variant="light" radius="xl" mb={7}>
+                Dubai-based · Building globally
+              </Badge>
+              <Title order={1} className="hero-name">Raj Mahadik</Title>
+              <Group gap={5} mt={4}>
+                <IconMapPin size={14} aria-hidden="true" />
+                <Text size="sm" c="dimmed">Full-Stack · Backend · Applied AI</Text>
+              </Group>
+            </div>
+          </Group>
+
+          <div>
+            <Text className="hero-eyebrow">ENGINEERING WITH INTENT</Text>
+            <Title order={2} className="hero-statement">
+              I turn complex workflows into reliable systems people can actually use.
+            </Title>
+            <Text c="dimmed" mt="sm" maw={760} lh={1.7}>
+              From event-driven APIs and production AI to thoughtful product interfaces, I build across the stack with a bias for clarity, resilience, and measurable outcomes.
+            </Text>
+          </div>
+
+          <Group gap="sm">
+            <Button color="red" radius="xl" onClick={showProjects} leftSection={<IconSparkles size={16} />} rightSection={<IconArrowRight size={16} />}>
+              Explore selected work
+            </Button>
+            <CopyButton value={email} timeout={2000}>
+              {({ copied, copy }) => (
+                <Button variant="default" radius="xl" onClick={copy} leftSection={copied ? <IconCheck size={16} /> : <IconCopy size={16} />}>
+                  {copied ? 'Email copied' : 'Copy email'}
+                </Button>
+              )}
+            </CopyButton>
+            <Group gap={4}>
+              <Tooltip label="LinkedIn" withArrow>
+                <ActionIcon component="a" href={linkedin} target="_blank" rel="noreferrer" variant="subtle" size="lg" aria-label="Open Raj Mahadik's LinkedIn profile">
+                  <IconBrandLinkedin size={19} />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip label="GitHub" withArrow>
+                <ActionIcon component="a" href={github} target="_blank" rel="noreferrer" variant="subtle" size="lg" aria-label="Open Raj Mahadik's GitHub profile">
+                  <IconBrandGithub size={19} />
+                </ActionIcon>
+              </Tooltip>
+            </Group>
+          </Group>
+
+          <div className="hero-principles" aria-label="Engineering focus areas">
+            <div>
+              <Text fw={700} size="sm">Reliable systems</Text>
+              <Text c="dimmed" size="xs">APIs, events, and cloud delivery</Text>
+            </div>
+            <div>
+              <Text fw={700} size="sm">Practical AI</Text>
+              <Text c="dimmed" size="xs">Vision, retrieval, and safeguards</Text>
+            </div>
+            <div>
+              <Text fw={700} size="sm">Product thinking</Text>
+              <Text c="dimmed" size="xs">Useful, accessible experiences</Text>
+            </div>
+          </div>
+        </Stack>
+      </Paper>
 
       {/* Tabs with FloatingIndicator */}
       <Tabs
@@ -134,38 +158,10 @@ export default function Portfolio() {
         onChange={setActiveTab}
         mb="xl"
         variant="pills"
-        styles={(theme) => ({
-          tab: {
-            position: 'relative',
-            zIndex: 1,
-            border: 'none',
-            fontWeight: 500,
-            letterSpacing: 0.5,
-            padding: `${rem(8)} ${rem(12)}`,
-            fontSize: theme.fontSizes.sm,
-            borderRadius: theme.radius.xl,
-            transition: 'all 200ms ease',
-
-            '&[data-active]': {
-              background: 'transparent',
-              border: 'none',
-              color: dark ? theme.white : theme.black,
-            },
-
-            '&:hover': {
-              backgroundColor: dark ? theme.colors.dark[6] : theme.colors.gray[0],
-            },
-          },
-          tabsList: {
-            position: 'relative',
-            borderBottom: `1px solid ${dark ? theme.colors.dark[4] : theme.colors.gray[2]}`,
-            paddingBottom: theme.spacing.xs,
-            gap: rem(4),
-          }
-        })}
       >
         <Tabs.List
           ref={rootRef}
+          className="portfolio-tabs-list"
           style={{
             position: 'relative',
             display: 'inline-flex',
@@ -183,6 +179,7 @@ export default function Portfolio() {
               key={section}
               value={section}
               ref={setTabRef(section)}
+              className="portfolio-tab"
             >
               {section}
             </Tabs.Tab>

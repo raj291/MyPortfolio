@@ -45,6 +45,129 @@ a {
   text-decoration: none;
 }
 
+.portfolio-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  background:
+    linear-gradient(135deg, rgba(239, 68, 68, 0.08), transparent 46%),
+    var(--mantine-color-body);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+}
+
+html[data-mantine-color-scheme='dark'] .portfolio-hero {
+  border-color: rgba(248, 113, 113, 0.22);
+  background:
+    linear-gradient(135deg, rgba(239, 68, 68, 0.13), transparent 48%),
+    #141517;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.hero-glow-one {
+  width: 240px;
+  height: 240px;
+  top: -150px;
+  right: 7%;
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.hero-glow-two {
+  width: 190px;
+  height: 190px;
+  bottom: -145px;
+  left: 20%;
+  background: rgba(124, 58, 237, 0.15);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: var(--mantine-spacing-lg);
+  right: var(--mantine-spacing-lg);
+  z-index: 2;
+}
+
+.hero-avatar {
+  flex: 0 0 auto;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.18);
+}
+
+.hero-name {
+  font-family: var(--font-pixel), var(--font-geist), monospace;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  line-height: 1;
+}
+
+.hero-eyebrow,
+.project-eyebrow {
+  color: var(--mantine-color-red-6);
+  font-family: var(--font-geist), monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.hero-statement {
+  max-width: 850px;
+  margin-top: 0.35rem;
+  font-size: clamp(1.75rem, 5vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.hero-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  border-radius: var(--mantine-radius-lg);
+  background: rgba(127, 127, 127, 0.16);
+}
+
+.hero-principles > div {
+  padding: 0.9rem 1rem;
+  background: color-mix(in srgb, var(--mantine-color-body) 92%, transparent);
+}
+
+.portfolio-tabs-list {
+  border-bottom: 1px solid var(--mantine-color-default-border);
+}
+
+.portfolio-tab {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  border-radius: var(--mantine-radius-xl);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.portfolio-tab[data-active] {
+  border: 0;
+  color: var(--mantine-color-white);
+  background: transparent;
+}
+
+.portfolio-tab:hover:not([data-active]) {
+  background: var(--mantine-color-default-hover);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -66,7 +189,26 @@ a {
 }
 
 .project-card {
+  position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card[data-featured='true'] {
+  border-color: rgba(239, 68, 68, 0.36);
+}
+
+.project-card[data-featured='true']::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  content: '';
+  background: linear-gradient(90deg, #ef4444, #f97316, #7c3aed);
+}
+
+.project-impact {
+  padding-left: 0.65rem;
+  border-left: 2px solid var(--mantine-color-red-6);
 }
 
 .project-card:hover {
@@ -87,6 +229,15 @@ a {
 
   .mantine-Tabs-list::-webkit-scrollbar {
     display: none;
+  }
+
+  .hero-principles {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-toggle {
+    top: var(--mantine-spacing-md);
+    right: var(--mantine-spacing-md);
   }
 }
 
