@@ -1,10 +1,9 @@
 import { Geist_Mono, Pixelify_Sans } from "next/font/google";
 import { Audiowide } from "next/font/google";
 import { ReactNode } from "react";
-import type { Metadata } from "next";
 import './globals.css';
 import '@mantine/core/styles.css';
-import { MantineProvider, ColorSchemeScript, createTheme } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript, createTheme, Container, Text, AppShell, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import FooterPage from "./Footer/page";
 
 // Define Google Font
@@ -25,7 +24,7 @@ const audiowide = Audiowide({
 const geist = Geist_Mono({
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-geist',
+  variable: '--font-audiowide',
 })
 
 // Create Mantine theme
@@ -49,22 +48,14 @@ const theme = createTheme({
     ],
   },
 });
-export const metadata: Metadata = {
-  metadataBase: new URL('https://rajmahadik.vercel.app'),
+export const metadata = {
   title: 'Raj Mahadik | Full-Stack & AI Software Engineer',
-  description: 'Dubai-based software engineer building reliable APIs, event-driven platforms, practical AI systems, and thoughtful product experiences.',
-  openGraph: {
-    title: 'Raj Mahadik | Engineering with Intent',
-    description: 'Reliable systems, practical AI, and product-minded engineering.',
-    url: '/',
-    siteName: 'Raj Mahadik',
-    type: 'website',
-  },
+  description: 'Portfolio of Raj Mahadik, a Dubai-based full-stack and AI software engineer building scalable APIs, cloud platforms, and intelligent applications.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${pixel.variable} ${audiowide.variable}`}>
+    <html lang="en" className={geist.variable}>
       <head>
         <ColorSchemeScript defaultColorScheme="dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
