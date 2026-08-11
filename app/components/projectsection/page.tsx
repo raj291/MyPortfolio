@@ -17,11 +17,24 @@ import { IconArrowUpRight } from '@tabler/icons-react';
 
 const featuredRepos = [
   {
+    name: 'North Star',
+    repo: 'North-Star',
+    description: 'A real-time construction-safety vision system that detects and tracks workers, associates PPE, and turns persistent safety signals into reviewable, evidence-backed events.',
+    tech: ['Python', 'PyTorch', 'YOLO', 'ByteTrack', 'FastAPI'],
+    new: true,
+  },
+  {
+    name: 'Global Disaster Prediction',
+    repo: 'global_disaster_prediction',
+    description: 'A research-oriented probabilistic forecasting platform for extreme precipitation, floods, tropical cyclones, and wildfires with uncertainty and source-lineage safeguards.',
+    tech: ['Python', 'Next.js', 'Geospatial Data', 'Forecasting'],
+    new: true,
+  },
+  {
     name: 'Online Mini Wallet',
     repo: 'OnlineMiniWalletDemo',
     description: 'A concurrency-safe wallet API with credit, debit, transfers, idempotent operations, filtered history, and layered negative-balance protection.',
     tech: ['.NET 8', 'ASP.NET Core', 'EF Core', 'SQLite', 'REST API'],
-    new: true,
   },
   {
     name: 'AI Agent Security Shield',
@@ -35,39 +48,24 @@ const featuredRepos = [
     repo: 'Neural-Network',
     description: 'An MNIST handwritten-digit classifier built from first principles with NumPy, including forward propagation, backpropagation, and gradient descent.',
     tech: ['Python', 'NumPy', 'MNIST', 'Machine Learning'],
-    new: true,
   },
   {
     name: 'Financial Risk Analyzer',
     repo: 'Finacial_Risk_Analyzer',
     description: 'An AI-powered service that analyzes transaction patterns to surface fraud, suspicious activity, and high-risk behavior.',
     tech: ['Python', 'FastAPI', 'Pydantic', 'Hugging Face', 'RAG'],
-    new: true,
   },
   {
     name: 'Requirements Clarifier AI',
     repo: 'Requirement-Clarifier',
     description: 'Turns vague Jira tickets into structured engineering specs with acceptance criteria, edge cases, test ideas, risks, and confidence scoring.',
     tech: ['Next.js', 'TypeScript', 'OpenAI', 'Zod', 'Mantine'],
-    new: true,
-  },
-  {
-    name: 'Job Profile Maker',
-    repo: 'JobProfileMaker',
-    description: 'An Angular SPA and ASP.NET Web API that parses resumes with Tika.NET and applies NLP techniques to help build job profiles.',
-    tech: ['.NET', 'C#', 'Angular', 'Microservices', 'Docker'],
   },
   {
     name: 'eShop Microservices',
     repo: 'EShop-Microservices',
     description: 'An e-commerce system built as ASP.NET Web API microservices with React and cloud delivery workflows.',
     tech: ['.NET', 'Microservices', 'RabbitMQ', 'Docker', 'React'],
-  },
-  {
-    name: 'Facial Detection - Haar',
-    repo: 'facial-dection-haar',
-    description: 'A facial-recognition model using Haar cascades, grayscale processing, Python, and OpenCV.',
-    tech: ['Python', 'OpenCV', 'Haar Cascade', 'CNN'],
   },
 ];
 
